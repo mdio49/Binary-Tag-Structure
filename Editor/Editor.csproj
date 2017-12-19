@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B5F2E8A6-AC6D-48A6-89BE-818B72309BE9}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BinaryTagEditor</RootNamespace>
+    <AssemblyName>Binary Tag Editor</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>BinaryTagEditor.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="frmAddTag.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddTag.Designer.cs">
+      <DependentUpon>frmAddTag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmFileProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFileProperties.Designer.cs">
+      <DependentUpon>frmFileProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tag Value Forms\frmEditBoolean.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tag Value Forms\frmEditBoolean.Designer.cs">
+      <DependentUpon>frmEditBoolean.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tag Value Forms\EditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tag Value Forms\frmEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tag Value Forms\frmEdit.Designer.cs">
+      <DependentUpon>frmEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tag Value Forms\frmEditLong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tag Value Forms\frmEditLong.Designer.cs">
+      <DependentUpon>frmEditLong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tag Value Forms\frmEditShort.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tag Value Forms\frmEditShort.Designer.cs">
+      <DependentUpon>frmEditShort.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tag Value Forms\frmEditInteger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tag Value Forms\frmEditInteger.Designer.cs">
+      <DependentUpon>frmEditInteger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tag Value Forms\frmEditString.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tag Value Forms\frmEditString.Designer.cs">
+      <DependentUpon>frmEditString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRename.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRename.Designer.cs">
+      <DependentUpon>frmRename.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Functions.cs" />
+    <Compile Include="HexadecimalLayoutPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="HexadecimalLayoutPanel.Designer.cs">
+      <DependentUpon>HexadecimalLayoutPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VisualThemes.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <EmbeddedResource Include="frmAddTag.resx">
+      <DependentUpon>frmAddTag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFileProperties.resx">
+      <DependentUpon>frmFileProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tag Value Forms\frmEditBoolean.resx">
+      <DependentUpon>frmEditBoolean.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tag Value Forms\frmEdit.resx">
+      <DependentUpon>frmEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tag Value Forms\frmEditLong.resx">
+      <DependentUpon>frmEditLong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tag Value Forms\frmEditShort.resx">
+      <DependentUpon>frmEditShort.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tag Value Forms\frmEditInteger.resx">
+      <DependentUpon>frmEditInteger.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tag Value Forms\frmEditString.resx">
+      <DependentUpon>frmEditString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRename.resx">
+      <DependentUpon>frmRename.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BinaryTagStructure\BinaryTagStructure.csproj">
+      <Project>{db46a243-33b9-485e-a92f-523723b130ec}</Project>
+      <Name>BinaryTagStructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
