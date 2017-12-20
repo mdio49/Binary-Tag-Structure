@@ -40,16 +40,16 @@ namespace BinaryTagEditor
 
         public static void Load(string path)
         {
-            //try
+            try
             {
                 BinaryTagStructure structure = new BinaryTagStructure(path);
                 structure.Load();
                 Functions.Structure = structure;
             }
-            /*catch
+            catch
             {
                 MessageBox.Show("An error occured while opening this file.", "Cannot Open File", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }*/
+            }
         }
 
         public static void Save()

@@ -365,6 +365,7 @@
             this.ctxTagDelete,
             this.menuItem7,
             this.ctxTagProperties});
+            this.ctxTag.Popup += new System.EventHandler(this.ctxTag_Popup);
             // 
             // ctxTagAdd
             // 
@@ -460,6 +461,7 @@
             // 
             this.ctxTagProperties.Index = 6;
             this.ctxTagProperties.Text = "&Tag Properties...";
+            this.ctxTagProperties.Click += new System.EventHandler(this.ctxTagProperties_Click);
             // 
             // tvwMain
             // 

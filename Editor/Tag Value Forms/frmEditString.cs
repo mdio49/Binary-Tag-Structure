@@ -22,7 +22,7 @@ namespace BinaryTagEditor
 
         private void btnApply_Click(object sender, EventArgs e)
         {
-            this.Apply(tbxValue.Text);
+            this.Apply(!String.IsNullOrEmpty(tbxValue.Text) ? tbxValue.Text : "");
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

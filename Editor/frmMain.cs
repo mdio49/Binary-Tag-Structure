@@ -37,7 +37,7 @@ namespace BinaryTagEditor
                     dynamic list = compound.GetTag(tag.Name);
                     int itemImageIndex = Functions.TagIcons.Keys.Contains((TagType)list.ListType) ? Functions.TagIcons[list.ListType] : 0;
 
-                    for (int i = 0; i < list.Tags.Count; i++)
+                    for (int i = 0; i < list.Tags.Length; i++)
                     {
                         Tag item = list.Tags[i];
                         TreeNode itemNode = new TreeNode((list.ListType == TagType.TagCompound ? i.ToString() : (i.ToString() + ": " + (item.Value == null ? "Null" : item.Value.ToString()))), itemImageIndex, itemImageIndex);
@@ -290,6 +290,17 @@ namespace BinaryTagEditor
             }
         }
 
+        private void ctxTagProperties_Click(object sender, EventArgs e)
+        {
+            TreeNode n = tvwMain.SelectedNode;
+            Tag tag = this.GetTagAtNode(n);
+
+            if (new frmTagProperties(tag).ShowDialog() == DialogResult.OK)
+            {
+                this.RefreshTreeview(tag.Parent, n.Parent);
+            }
+        }
+
         private void ctxTagAddNew_Click(object sender, EventArgs e)
         {
             TreeNode n = tvwMain.SelectedNode;
@@ -298,6 +309,28 @@ namespace BinaryTagEditor
             if (new frmAddTag(tag).ShowDialog() == DialogResult.OK)
             {
                 this.RefreshTreeview(tag, n);
+            }
+        }
+
+        private void ctxTag_Popup(object sender, EventArgs e)
+        {
+            TreeNode n = tvwMain.SelectedNode;
+            Tag tag = this.GetTagAtNode(n);
+
+            if (tag.Type == TagType.TagCompound)
+            {
+                ctxTagAdd.Enabled = true;
+                ctxTagModify.Enabled = false;
+            }
+            else if (tag.Type == TagType.TagList)
+            {
+                ctxTagAdd.Enabled = true;
+                ctxTagModify.Enabled = false;
+            }
+            else
+            {
+                ctxTagAdd.Enabled = false;
+                ctxTagModify.Enabled = true;
             }
         }
 

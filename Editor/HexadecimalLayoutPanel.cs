@@ -12,6 +12,10 @@ namespace Controls
 {
     public partial class HexadecimalLayoutPanel : FlowLayoutPanel
     {
+        public event EventHandler TextChanged;
+
+        public bool ReadOnly { get; set; }
+
         private TextBox selectedBox = null;
 
         public HexadecimalLayoutPanel()
@@ -20,6 +24,7 @@ namespace Controls
 
             this.BackColor = Color.White;
             this.BorderStyle = BorderStyle.Fixed3D;
+            this.ReadOnly = false;
         }
 
         public void AddBox(byte value)
@@ -42,6 +47,7 @@ namespace Controls
             tbx_hex.KeyPress += tbx_hex_KeyPress;
             tbx_hex.MouseClick += tbx_hex_MouseClick;
             tbx_hex.TextChanged += tbx_hex_TextChanged;
+            tbx_hex.TextChanged += this.TextChanged;
 
             this.Controls.Add(tbx_hex);
         }
@@ -82,7 +88,7 @@ namespace Controls
             {
                 box.BackColor = Color.Black;
                 box.ForeColor = Color.White;
-                box.ReadOnly = false;
+                box.ReadOnly = this.ReadOnly;
 
                 selectedBox = box;
             }

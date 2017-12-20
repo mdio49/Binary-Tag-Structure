@@ -189,21 +189,11 @@ namespace System.IO.BinaryTagStructure
         /// <summary>
         /// Gets if a tag with the given name exists in the structure.
         /// </summary>
-        /// <param name="name">The name of the tag.</param>
-        /// <returns>Returns a value indicating if a tag with the given name exists.</returns>
-        public bool ContainsTag(string name)
+        /// <param name="path">The path of the binary tag in the compound.</param>
+        /// <returns>Returns a value indicating if a tag at the given path exists.</returns>
+        public bool ContainsTag(string path)
         {
-            string[] paths = name.Split('/');
-
-            TagCompound comp = this;
-
-            for (int i = 0; i < paths.Length - 1; i++)
-            {
-                TagCompound tag = (TagCompound)comp.GetTag(paths[i]);
-                comp = tag;
-            }
-
-            return comp.Compounds.FindAll(x => x.Name == paths[paths.Length - 1]).Count > 0 || comp.Tags.FindAll(x => x.Name == paths[paths.Length - 1]).Count > 0;
+            return this.GetTag(path) != null;
         }
 
         /// <summary>
@@ -246,6 +236,7 @@ namespace System.IO.BinaryTagStructure
         {
             if (tag.Type == TagType.TagCompound)
             {
+                tag.Parent = this;
                 this.AddCompound((TagCompound)tag);
             }
             else if (!this.ContainsTag(tag.Name))
@@ -262,12 +253,25 @@ namespace System.IO.BinaryTagStructure
         /// <summary>
         /// Removes the specified tag from the structure.
         /// </summary>
-        /// <param name="name">The name of the binary tag.</param>
-        public void RemoveTag(string name)
+        /// <param name="path">The path of the binary tag in the compound.</param>
+        public void RemoveTag(string path)
         {
-            string[] paths = name.Split('/');
+            Tag tag = this.GetTag(path);
+
+            if (tag != null)
+            {
+                tag.Parent.Compounds.RemoveAll(x => x.Name == tag.Name);
+                tag.Parent.Tags.RemoveAll(x => x.Name == tag.Name);
+            }
+            else
+            {
+                throw new NullReferenceException("The given tag path does not exist in the structure.");
+            }
+
+            /*string[] paths = name.Split('/');
 
             TagCompound comp = this;
+            TagList<int> t;
 
             for (int i = 0; i < paths.Length - 1; i++)
             {
@@ -285,13 +289,13 @@ namespace System.IO.BinaryTagStructure
             else
             {
                 throw new NullReferenceException("The given tag name does not exist in the structure.");
-            }
+            }*/
         }
 
         /// <summary>
         /// Gets the tag at the specified path.
         /// </summary>
-        /// <param name="path">The path of the binary tag.</param>
+        /// <param name="path">The path of the binary tag in the compound.</param>
         /// <returns>Returns the tag at the specified path.</returns>
         public Tag GetTag(string path)
         {
@@ -364,7 +368,7 @@ namespace System.IO.BinaryTagStructure
             }
             else
             {
-                throw new ArgumentException("The given tag name does not exist in the structure.");
+                return null;
             }
         }
 
@@ -443,7 +447,7 @@ namespace System.IO.BinaryTagStructure
 
             if (comp.Tags.Contains(lTag))
             {
-                lTag.Tags.Clear();
+                lTag.Clear();
                 lTag.AddRange(values);
             }
             else

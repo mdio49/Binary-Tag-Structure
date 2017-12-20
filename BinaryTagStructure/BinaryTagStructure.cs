@@ -300,7 +300,7 @@ namespace System.IO.BinaryTagStructure
                             {
                                 TagCompound c = new TagCompound(null);
                                 LoadCompound(reader, c);
-                                tag.Tags.Add(c);
+                                tag.Add(c);
                             }
                             else
                             {

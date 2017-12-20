@@ -62,6 +62,12 @@
     <Compile Include="frmFileProperties.Designer.cs">
       <DependentUpon>frmFileProperties.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmTagProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTagProperties.Designer.cs">
+      <DependentUpon>frmTagProperties.cs</DependentUpon>
+    </Compile>
     <Compile Include="Tag Value Forms\frmEditBoolean.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +136,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmFileProperties.resx">
       <DependentUpon>frmFileProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTagProperties.resx">
+      <DependentUpon>frmTagProperties.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tag Value Forms\frmEditBoolean.resx">
       <DependentUpon>frmEditBoolean.cs</DependentUpon>

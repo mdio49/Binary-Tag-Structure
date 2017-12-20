@@ -22,7 +22,11 @@ namespace System.IO.BinaryTagStructure
         {
             get
             {
-                return (T)this.Tags[index].Value;
+                return (T)this._tags[index].Value;
+            }
+            set
+            {
+                _tags[index] = new Tag(null, this.ListType, (T)value);
             }
         }
 
@@ -31,7 +35,18 @@ namespace System.IO.BinaryTagStructure
         /// </summary>
         public TagType ListType { get; set; }
 
-        public List<Tag> Tags { get; set; }
+        /// <summary>
+        /// Gets the collection of tags contained within the list.
+        /// </summary>
+        public Tag[] Tags
+        {
+            get
+            {
+                return _tags.ToArray();
+            }
+        }
+
+        private List<Tag> _tags;
 
         /// <summary>
         /// Gets the length of the tag; for a list tag, this represents the number of items in the list.
@@ -40,7 +55,7 @@ namespace System.IO.BinaryTagStructure
         {
             get
             {
-                return this.Tags.Count;
+                return _tags.Count;
             }
         }
 
@@ -59,7 +74,7 @@ namespace System.IO.BinaryTagStructure
                     writer.Write(this.ListType.Identifier);
 
                     // Writes the data of each tag.
-                    foreach (Tag tag in this.Tags)
+                    foreach (Tag tag in _tags)
                     {
                         if (tag.Type.Length < 0 && this.ListType != TagType.TagCompound)
                         {
@@ -80,32 +95,56 @@ namespace System.IO.BinaryTagStructure
         public TagList(string name) : base(name, TagType.TagList, null)
         {
             this.ListType = TagType.GetTagTypeByDataType(typeof(T));
-
-            this.Tags = new List<Tag>();
+            _tags = new List<Tag>();
         }
 
+        /// <summary>
+        /// Adds a tag to the end of the list tag.
+        /// </summary>
+        /// <param name="value">The tag to add.</param>
         public void Add(T value)
         {
             if (this.ListType == TagType.TagCompound && typeof(T) == typeof(TagCompound))
             {
                 TagCompound t = value as TagCompound;
                 t.Parent = this.Parent;
-                this.Tags.Add(t);
+                _tags.Add(t);
             }
             else
             {
                 Tag t = new Tag(null, this.ListType, value);
                 t.Parent = this.Parent;
-                this.Tags.Add(t);
+                _tags.Add(t);
             }
         }
         
-        public void AddRange(T[] values)
+        /// <summary>
+        /// Adds a collection of tags to the end of the list tag.
+        /// </summary>
+        /// <param name="values">The tags to add.</param>
+        public void AddRange(params T[] values)
         {
             foreach (T value in values)
             {
                 this.Add(value);
             }
+        }
+
+        /// <summary>
+        /// Removes all tags from the list tag.
+        /// </summary>
+        public void Clear()
+        {
+            _tags.Clear();
+        }
+
+        /// <summary>
+        /// Removes the tag at the specified index.
+        /// </summary>
+        /// <param name="index">The index of the tag to remove.</param>
+        public void RemoveAt(int index)
+        {
+            _tags.RemoveAt(index);
         }
     }
 }
